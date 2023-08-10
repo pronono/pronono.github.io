@@ -1,0 +1,94 @@
+* {
+  background-color: rgb(40, 40, 40);
+  color: white;
+  font-family: 'Lucida Console';
+  margin: 0px;
+  padding: 0px;
+  box-sizing: border-box;
+}
+
+.container {
+  position: fixed;
+  display: flex;
+  height: 100vh;
+  width: 80vw;
+  overflow-y: scroll;
+  top: 0px;
+  left: 50%;
+  transform: translate(-50%, 0%);
+}
+
+@media screen and (max-width: 1200px) {
+  .container {
+    width: 100vw;
+  }
+}
+
+.leftCol,
+.rightCol {
+  width: 50%;
+  padding: 1rem;
+}
+
+@media screen and (max-width: 900px) {
+  .container {
+    flex-direction: column;
+  }
+
+  .leftCol,
+  .rightCol {
+    width: 100%;
+  }
+}
+
+table#rankingTable {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: center;
+  font-size: 0.8rem;
+}
+
+table#rankingTable td {
+  border: 1px solid;
+}
+
+table#rankingTable td:nth-child(1),
+table#rankingTable td:nth-child(2) {
+  width: 10%;
+}
+
+table#rankingTable img {
+  width: 40px;
+}
+
+.rightCol {
+  display: flex;
+  flex-direction: column;
+  align-items: end;
+}
+
+#leagueSelection {
+  width: 200px;
+}
+
+.teams {
+  border: 1px solid;
+  margin-top: 1rem;
+  padding: 1rem;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.team {
+  width: 130px;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.team img {
+  width: 60px;
+}
