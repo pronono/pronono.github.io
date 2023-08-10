@@ -6,28 +6,27 @@
     <title>Ranking</title>
     <link rel="icon" href="https://img.uefa.com/imgml/favicon/favicon.ico" />
     <link rel="stylesheet" href="ranking.css" />
-    <script src="leagues.js"></script>
+    <link rel="stylesheet" href="assets/jquery-ui.min.css" />
   </head>
   <body>
     <div class="container">
-      <div class="leftCol" ondrop="drop(event)" ondragover="allowDrop(event)">
-        <table id="rankingTable">
-          <tbody>
-            <tr>
-              <td>...</td>
-              <td>...</td>
-              <td>...</td>
-            </tr>
-          </tbody>
-        </table>
+      <div class="leftCol">
+        <ol id="ranking" class="ranking connectedSortable">
+          <span id="rankingInfo">Drop a Team here</span>
+        </ol>
       </div>
       <div class="rightCol">
         <select id="leagueSelection">
           <option value="noLeague">Select a League</option>
         </select>
-        <div class="teams">Select a League</div>
+        <ul id="teams" class="connectedSortable">
+          Select a League
+        </ul>
       </div>
     </div>
+    <script src="leagues/leagues.js"></script>
+    <script src="assets/jquery.min.js"></script>
+    <script src="assets/jquery-ui.min.js"></script>
     <script src="ranking.js"></script>
   </body>
 </html>

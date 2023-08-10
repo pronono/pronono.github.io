@@ -41,24 +41,48 @@
   }
 }
 
-table#rankingTable {
-  width: 100%;
-  border-collapse: collapse;
-  text-align: center;
-  font-size: 0.8rem;
+#ranking {
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  counter-reset: item;
+  list-style-type: none;
 }
 
-table#rankingTable td {
+#ranking .team {
+  height: 35px;
+  width: 100%;
+  display: flex;
+}
+
+#ranking .team:before {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  width: 10%;
+  border: 1px solid;
+  content: counter(item) '  ';
+  counter-increment: item;
+}
+
+#ranking .team * {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
   border: 1px solid;
 }
 
-table#rankingTable td:nth-child(1),
-table#rankingTable td:nth-child(2) {
+#ranking .team img {
   width: 10%;
+  object-fit: contain;
 }
 
-table#rankingTable img {
-  width: 40px;
+#ranking .team span {
+  width: 80%;
 }
 
 .rightCol {
@@ -71,7 +95,7 @@ table#rankingTable img {
   width: 200px;
 }
 
-.teams {
+#teams {
   border: 1px solid;
   margin-top: 1rem;
   padding: 1rem;
@@ -80,8 +104,8 @@ table#rankingTable img {
   flex-wrap: wrap;
 }
 
-.team {
-  width: 130px;
+#teams .team {
+  width: 120px;
   margin: 5px;
   display: flex;
   flex-direction: column;
