@@ -1,4 +1,5 @@
 const leagueSelection = document.getElementById('leagueSelection');
+let currentLeague = 'noLeague';
 
 for (const [key, value] of Object.entries(leagues)) {
   const option = document.createElement('option');
@@ -15,12 +16,16 @@ rightCol.addEventListener('change', (event) => {
   }
 });
 
-const teams = document.querySelector('#teams');
-const ranking = document.querySelector('#ranking');
+const legendsDiv = document.getElementById('legends');
+const teamsDiv = document.getElementById('teams');
+const ranking = document.getElementById('ranking');
 const rankingInfo = document.getElementById('rankingInfo');
 
 function changeLeague(league) {
-  teams.innerHTML = '';
+  currentLeague = league;
+
+  legendsDiv.innerHTML = '';
+  teamsDiv.innerHTML = '';
   $('#ranking li').remove();
   showRankingInfo();
 
@@ -29,15 +34,16 @@ function changeLeague(league) {
   }
 
   if (league === 'noLeague') {
-    teams.innerHTML = 'Select a League';
+    teamsDiv.innerHTML = 'Select a League';
     return;
   }
 
-  createTeams(leagues[league]);
+  createTeams(leagues[league]['teams']);
+  createLegend(leagues[league]['legends']);
 }
 
-function createTeams(league) {
-  for (const [key, value] of Object.entries(league)) {
+function createTeams(teams) {
+  for (const [key, value] of Object.entries(teams)) {
     const team = document.createElement('li');
     team.setAttribute('id', key);
     team.setAttribute('class', 'team');
@@ -50,10 +56,20 @@ function createTeams(league) {
 
     team.appendChild(img);
     team.appendChild(text);
-    teams.appendChild(team);
+    teamsDiv.appendChild(team);
   }
 
   createSortable();
+}
+
+function createLegend(legends) {
+  for (const [key, value] of Object.entries(legends)) {
+    const legend = document.createElement('li');
+    legend.setAttribute('class', `legend-${value.color}`);
+    legend.innerHTML = key;
+
+    legendsDiv.appendChild(legend);
+  }
 }
 
 function createSortable() {
@@ -62,6 +78,7 @@ function createSortable() {
     items: 'li',
     update: function () {
       showRankingInfo();
+      updateColor();
     },
   });
 }
@@ -69,11 +86,13 @@ function createSortable() {
 $('#ranking').on('click', 'li', function (event) {
   $(event.target).closest('li').detach().appendTo('#teams');
   showRankingInfo();
+  updateColor();
 });
 
 $('#teams').on('click', 'li', function (event) {
   $(event.target).closest('li').detach().appendTo('#ranking');
   showRankingInfo();
+  updateColor();
 });
 
 function showRankingInfo() {
@@ -81,5 +100,21 @@ function showRankingInfo() {
     rankingInfo.hidden = true;
   } else {
     rankingInfo.hidden = false;
+  }
+}
+
+function updateColor() {
+  const legends = leagues[currentLeague]['legends'];
+
+  $(`#ranking li`).removeClass(function (index, className) {
+    return (className.match(/(^|\s)legend-\S+/g) || []).join(' ');
+  });
+
+  for (const [key, value] of Object.entries(legends)) {
+    value.position.forEach((element) => {
+      $(`#ranking li:nth-child(${element + 1})`).addClass(
+        `legend-${value.color}`
+      );
+    });
   }
 }
