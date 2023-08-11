@@ -131,15 +131,15 @@
 }
 
 li.legend-blue:before {
-  background-color: #65c1ff;
+  background-color: #4bb7ff;
+}
+
+li.legend-blue-2:before {
+  background-color: #a4dafd;
 }
 
 li.legend-orange:before {
   background-color: #ffb52e;
-}
-
-li.legend-orange-2:before {
-  background-color: #d3b071;
 }
 
 li.legend-green:before {
